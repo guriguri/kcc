@@ -935,7 +935,7 @@ def makeParser():
     processingOptions.add_option("-s", "--stretch", action="store_true", dest="stretch", default=False,
                                  help="Stretch images to device's resolution")
     processingOptions.add_option("-r", "--splitter", type="int", dest="splitter", default="0",
-                                 help="Double page parsing mode. 0: Split 1: Rotate 2: Both [Default=0]")
+                                 help="Double page parsing mode. -1: Don't split 0: Split 1: Rotate 2: Both [Default=0]")
     processingOptions.add_option("-g", "--gamma", type="float", dest="gamma", default="0.0",
                                  help="Apply gamma correction to linearize the image [Default=Auto]")
     processingOptions.add_option("-c", "--cropping", type="int", dest="cropping", default="2",

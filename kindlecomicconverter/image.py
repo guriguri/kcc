@@ -124,24 +124,28 @@ class ComicPageParser:
                 and not self.opt.webtoon and self.opt.splitter == 1:
             self.payload.append(['R', self.source, self.image.rotate(90, Image.BICUBIC, True), self.color, self.fill])
         elif (width > height) != (dstwidth > dstheight) and not self.opt.webtoon:
-            if self.opt.splitter != 1:
-                if width > height:
-                    leftbox = (0, 0, int(width / 2), height)
-                    rightbox = (int(width / 2), 0, width, height)
-                else:
-                    leftbox = (0, 0, width, int(height / 2))
-                    rightbox = (0, int(height / 2), width, height)
-                if self.opt.righttoleft:
-                    pageone = self.image.crop(rightbox)
-                    pagetwo = self.image.crop(leftbox)
-                else:
-                    pageone = self.image.crop(leftbox)
-                    pagetwo = self.image.crop(rightbox)
-                self.payload.append(['S1', self.source, pageone, self.color, self.fill])
-                self.payload.append(['S2', self.source, pagetwo, self.color, self.fill])
-            if self.opt.splitter > 0:
-                self.payload.append(['R', self.source, self.image.rotate(90, Image.BICUBIC, True),
-                                    self.color, self.fill])
+            if self.opt.splitter == -1:
+                self.payload.append(['N', self.source, self.image.rotate(0, Image.BICUBIC, True), self.color, self.fill])
+                # self.payload.append(['N', self.source, self.image, self.color, self.fill])
+            else:
+                if self.opt.splitter != 1:
+                    if width > height:
+                        leftbox = (0, 0, int(width / 2), height)
+                        rightbox = (int(width / 2), 0, width, height)
+                    else:
+                        leftbox = (0, 0, width, int(height / 2))
+                        rightbox = (0, int(height / 2), width, height)
+                    if self.opt.righttoleft:
+                        pageone = self.image.crop(rightbox)
+                        pagetwo = self.image.crop(leftbox)
+                    else:
+                        pageone = self.image.crop(leftbox)
+                        pagetwo = self.image.crop(rightbox)
+                    self.payload.append(['S1', self.source, pageone, self.color, self.fill])
+                    self.payload.append(['S2', self.source, pagetwo, self.color, self.fill])
+                if self.opt.splitter > 0:
+                    self.payload.append(['R', self.source, self.image.rotate(90, Image.BICUBIC, True),
+                                        self.color, self.fill])
         else:
             self.payload.append(['N', self.source, self.image, self.color, self.fill])
 
