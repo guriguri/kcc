@@ -1074,6 +1074,7 @@ def makeBook(source, qtgui=None):
     checkPre(source)
     print("Preparing source images...")
     path = getWorkFolder(source)
+    print('WorkFolder', path)
     print("Checking images...")
     getComicInfo(os.path.join(path, "OEBPS", "Images"), source)
     detectCorruption(os.path.join(path, "OEBPS", "Images"), source)
